@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Doctor Vinyl Records</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Animated Sidebars (desktop only) -->
+  <div class="animated-sidebar animated-sidebar-left">
+    <div class="ani-imgs">
+      <br>
+      <br>
+      <img src="assets/new pics/ani7.png" class="ani ani7" alt="Ani7">
+      <img src="assets/new pics/ani3.png" class="ani ani3" alt="Ani3">
+      <img src="assets/new pics/ani11.png" class="ani ani11" alt="Ani11">
+      <img src="assets/new pics/ani5.png" class="ani ani5" alt="Ani5">
+      <img src="assets/new pics/ani13.png" class="ani ani13" alt="Ani13">
+      <img src="assets/new pics/ani2.png" class="ani ani2" alt="Ani2">
+      <img src="assets/new pics/ani10.png" class="ani ani10" alt="Ani10">
+      <img src="assets/new pics/ani8.png" class="ani ani8" alt="Ani8">
+      <img src="assets/new pics/ani4.png" class="ani ani4" alt="Ani4">
+      <img src="assets/new pics/ani12.png" class="ani ani12" alt="Ani12">
+      <img src="assets/new pics/ani9.png" class="ani ani9" alt="Ani9">
+      <img src="assets/new pics/ani6.png" class="ani ani6" alt="Ani6">
+    </div>
+  </div>
+  <div class="animated-sidebar animated-sidebar-right">
+    <div class="ani-imgs">
+      <br>
+      <img src="assets/new pics/ani8.png" class="ani ani8 mirrored" alt="Ani8">
+      <img src="assets/new pics/ani4.png" class="ani ani4 mirrored" alt="Ani4">
+      <img src="assets/new pics/ani12.png" class="ani ani12 mirrored" alt="Ani12">
+      <img src="assets/new pics/ani9.png" class="ani ani9 mirrored" alt="Ani9">
+      <img src="assets/new pics/ani6.png" class="ani ani6 mirrored" alt="Ani6">
+      <img src="assets/new pics/ani3.png" class="ani ani3 mirrored" alt="Ani3">
+      <img src="assets/new pics/ani11.png" class="ani ani11 mirrored" alt="Ani11">
+      <img src="assets/new pics/ani5.png" class="ani ani5 mirrored" alt="Ani5">
+      <img src="assets/new pics/ani13.png" class="ani ani13 mirrored" alt="Ani13">
+      <img src="assets/new pics/ani2.png" class="ani ani2 mirrored" alt="Ani2">
+      <img src="assets/new pics/ani10.png" class="ani ani10 mirrored" alt="Ani10">
+      <img src="assets/new pics/ani7.png" class="ani ani7 mirrored" alt="Ani7">
+    </div>
+  </div>
+      <!-- Navbar -->
+      <nav class="navbar">
+        <a href="#home"><img src="assets/Logo-DV1.png" alt="Doctor Vinyl Logo" class="navbar-logo"></a>
+        <div class="navbar-links">
+          <a href="#home" data-i18n="nav_home">Home</a>
+          <a href="#records" data-i18n="nav_records">Records</a>
+          <a href="#specials" data-i18n="nav_specials">Specials</a>
+          <a href="#about" data-i18n="nav_about">About</a>
+          <a href="#contact" data-i18n="nav_contact">Contact/Location</a>
+          <button class="record-add" id="openSalesBtn" data-i18n="nav_sales">Sales</button>
+          <button class="record-add" id="loginBtn" data-i18n="nav_login">Login</button>
+          <span id="loginStatus"></span>
+          <button class="record-add" id="myAccountBtn" data-i18n="my_account_btn">My Account</button>
+          <button class="admin-cancel-btn" id="clearStorageBtn" title="Clear Storage">🗑️</button>
+          <div class="navbar-cart" id="cartBtnNav">
+            🛒<span class="cart-count" id="cartCountNav">0</span>
+          </div>
+          <div class="navbar-search-lang">
+            <div class="navbar-search">
+              <input type="text" id="searchInput" data-i18n-placeholder="search_placeholder" placeholder="Search...">
+            </div>
+            <div class="navbar-lang-switch">
+              <label for="langSelect" class="visually-hidden">Language</label>
+              <select id="langSelect">
+                <option value="en">🇬🇧</option>
+                <option value="nl">🇳🇱</option>
+                <option value="fr">🇫🇷</option>
+                <option value="de">🇩🇪</option>
+              </select>
+            </div>
+          </div>
+          <div class="navbar-cart" id="cartBtn">
+            🛒<span class="cart-count" id="cartCount">0</span>
+          </div>
+        </div>
+        <div class="navbar-hamburger" id="hamburgerBtn">
+          <!-- Hamburger icon -->
+          <img id="hamburgerIcon" src="assets/menu-bar.png" alt="Menu" class="hamburger-icon-img" />
+        </div>
+      </nav>
+  <!-- Hamburger menu (mobile) -->
+  <div class="hamburger-menu" id="hamburgerMenu">
+    <div class="mobile-search-lang">
+      <input type="text" placeholder="Search..." id="mobileSearchInput" data-i18n-placeholder="search_placeholder">
+      <div class="mobile-lang-switch">
+        <label for="mobileLangSelect" class="visually-hidden">Language</label>
+        <select id="mobileLangSelect">
+          <option value="en">🇬🇧</option>
+          <option value="nl">🇳🇱</option>
+          <option value="fr">🇫🇷</option>
+          <option value="de">🇩🇪</option>
+        </select>
+      </div>
+    </div>
+    <a href="#home" onclick="closeMenu()" data-i18n="nav_home">Home</a>
+    <a href="#records" onclick="closeMenu()" data-i18n="nav_records">Records</a>
+    <a href="#specials" onclick="closeMenu()" data-i18n="nav_specials">Specials</a>
+    <a href="#about" onclick="closeMenu()" data-i18n="nav_about">About</a>
+    <a href="#contact" onclick="closeMenu()" data-i18n="nav_contact">Contact</a>
+    <button class="record-add" id="openSalesBtnMobile" data-i18n="nav_sales">Sales</button>
+    <button class="record-add" id="loginBtnMobile" data-i18n="nav_login">Login</button>
+    <button class="record-add" id="registerBtnMobile" data-i18n="register_btn">Register</button>
+    <button class="record-add" id="myAccountBtnMobile" data-i18n="my_account_btn">My Account</button>
+    <span id="loginStatusMobile"></span>
+    <div class="navbar-cart" id="mobileCartBtn">
+      🛒<span class="cart-count" id="mobileCartCount">0</span>
+    </div>
+  </div>
+  <!-- Sales Slideout -->
+  <div class="sales-slideout" id="salesSlideout">
+    <div class="sales-slideout-header">
+      <img src="assets/iconssales.png" alt="Sales" class="sales-slideout-icon ani ani6">
+      <button class="sales-slideout-close" id="closeSalesBtn">&times;</button>
+    </div>
+    <div class="sales-slideout-content">
+      <div id="salesRecordsList"></div>
+    </div>
+  </div>
+  <!-- Home Hero -->
+  <section class="home-hero" id="home">
+    <div class="home-hero-overlay"></div>
+    <div class="home-hero-content">
+      <div class="home-hero-logo">
+        <img src="assets/hero-logo.png" alt="Doctor Vinyl Records Logo" class="hero-logo-img">
+      </div>
+      <p class="home-hero-subtitle" data-i18n="hero_subtitle">Vinyl specialist in Brussels – New & second-hand records, specials & more</p>
+    </div>
+  </section>
+  <!-- Admin Panel Access Button (only visible for admin) -->
+  <div class="admin-access admin-access-center" id="adminAccessPanel">
+    <a href="admin.html" class="admin-btn" id="openAdminPanelBtn">Open Admin Panel</a>
+  </div>
+  <!-- Records Section -->
+  <section class="section" id="records">
+    <h2 class="section-title" data-i18n="records_title"></h2>
+    <div class="records-pagination">
+      <button id="recordsPrevBtn" aria-label="Previous page">&#8592;</button>
+      <span id="recordsPageInfo"></span>
+      <button id="recordsNextBtn" aria-label="Next page">&#8594;</button>
+    </div>
+    <div class="grid" id="recordsGrid">
+    </div>
+  </section>
+  <!-- Specials Section -->
+  <section class="section" id="specials">
+    <h2 class="section-title" data-i18n="specials_title"></h2>
+    <div class="grid" id="specialsGrid">
+      <!-- Specials worden hier dynamisch gerenderd -->
+    </div>
+  </section>
+  <!-- About/News Section -->
+  <section class="section" id="about">
+    <h2 class="section-title" data-i18n="about_title"></h2>
+    <div class="about-section">
+      <div class="about-collage">
+        <img src="assets/ani1.png" alt="Ani1" class="ani ani1 about-collage-img about-collage-img1">
+        <img src="assets/ani special.png" alt="Ani Special" class="ani ani-special about-collage-img about-collage-img2">
+        <img src="assets/ani2.png" alt="Ani2" class="ani ani2 about-collage-img about-collage-img3">
+        <img src="assets/aboutPic1.png" alt="About" class="about-img-main">
+      </div>
+      <div class="about-content">
+        <p data-i18n="about_text"></p>
+        <!-- ...more news or facts, admin can add... -->
+      </div>
+    </div>
+  </section>
+  <!-- Contact Section -->
+  <section class="section" id="contact">
+    <h2 class="section-title" data-i18n="contact_title"></h2>
+    <div class="contact-section contact-fullpage">
+      <!-- Left decoration -->
+      <!-- Scattered left decoration -->
+      <img src="assets/ani%20special.png" class="ani ani-special contact-ani-large contact-deco-scatter contact-deco-left-1" alt="Ani Special">
+      <img src="assets/new pics/ani11.png" class="ani ani11 contact-ani-large contact-deco-scatter contact-deco-left-2" alt="Ani11">
+      <img src="assets/ani3.png" class="ani ani3 contact-ani-large contact-deco-scatter contact-deco-left-3" alt="Ani3">
+      <img src="assets/ani1.png" class="ani ani1 contact-ani-large contact-deco-scatter contact-deco-left-4" alt="Ani1">
+      <div class="contact-collage">
+        <img src="assets/Adobe Express - file (2).png" alt="Doctor Vinyl Contact" class="contact-collage-img">
+      </div>
+      <div class="contact-content">
+        <div class="contact-row">
+          <img src="assets/real-estate.png" alt="Adres icoon" class="contact-icon">
+          <span class="contact-address" data-i18n="contact_address"></span>
+        </div>
+        <div class="contact-row">
+          <img src="assets/telephone.png" alt="Telefoon icoon" class="contact-icon">
+          <span class="contact-phone" data-i18n="contact_phone"></span>
+        </div>
+        <div class="contact-row">
+          <img src="assets/email.png" alt="Mail icoon" class="contact-icon">
+          <a href="mailto:erge.stormen@doctorvinylrecords.be" class="contact-mail" data-i18n="contact_mail">info@doctorvinylrecords.be</a>
+        </div>
+        <iframe class="contact-map"
+          src="https://www.google.com/maps?q=Groot+Eiland+1,+1000+Brussels&output=embed"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Map Doctor Vinyl Brussels"></iframe>
+      </div>
+      <!-- Right decoration - scattered -->
+      <img src="assets/ani%20special.png" class="ani ani-special contact-ani-large contact-deco-scatter contact-deco-right-1" alt="Ani Special">
+      <img src="assets/new pics/ani3.png" class="ani ani3 contact-ani-large contact-deco-scatter contact-deco-right-2" alt="Ani3">
+      <img src="assets/icons11.png" class="ani ani6 contact-ani-large contact-deco-scatter contact-deco-right-3" alt="Icons11">
+      <img src="assets/ani2.png" class="ani ani2 contact-ani-large contact-deco-scatter contact-deco-right-4" alt="Ani2">
+    </div>
+  </section>
+  <!-- My Account Modal -->
+  <div class="login-modal" id="myAccountModal">
+    <div class="login-modal-content">
+      <button class="login-modal-close" id="closeMyAccountBtn">&times;</button>
+      <h2 data-i18n="my_account_title">My Account</h2>
+      <form id="myAccountForm" autocomplete="off">
+        <label for="myAccountUser" data-i18n="register_username">Email</label>
+        <input type="email" id="myAccountUser" required placeholder="Email" data-i18n-placeholder="register_username_placeholder" disabled>
+        <label for="myAccountPass" data-i18n="register_password">Password</label>
+        <input type="password" id="myAccountPass" required placeholder="Password" data-i18n-placeholder="register_password_placeholder">
+        <label for="myAccountPassConfirm" data-i18n="register_password_confirm">Confirm Password</label>
+        <input type="password" id="myAccountPassConfirm" required placeholder="Confirm Password" data-i18n-placeholder="register_password_confirm_placeholder">
+        <label for="myAccountLastName" data-i18n="register_lastname">Last Name</label>
+        <input type="text" id="myAccountLastName" placeholder="Last Name" data-i18n-placeholder="register_lastname_placeholder">
+        <label for="myAccountFirstName" data-i18n="register_firstname">First Name</label>
+        <input type="text" id="myAccountFirstName" placeholder="First Name" data-i18n-placeholder="register_firstname_placeholder">
+        <div class="register-row">
+          <div class="register-col">
+            <label for="myAccountStreet" data-i18n="register_street">Street</label>
+            <input type="text" id="myAccountStreet" placeholder="Street" data-i18n-placeholder="register_street_placeholder">
+          </div>
+          <div class="register-col">
+            <label for="myAccountNumber" data-i18n="register_number">Number</label>
+            <input type="text" id="myAccountNumber" placeholder="Number" data-i18n-placeholder="register_number_placeholder">
+          </div>
+          <div class="register-col">
+            <label for="myAccountApp" data-i18n="register_app">App.</label>
+            <input type="text" id="myAccountApp" placeholder="App." data-i18n-placeholder="register_app_placeholder">
+          </div>
+        </div>
+        <div class="register-row">
+          <div class="register-col">
+            <label for="myAccountPostal" data-i18n="register_postal">Postal Code</label>
+            <input type="text" id="myAccountPostal" placeholder="e.g. 1000" data-i18n-placeholder="register_postal_placeholder">
+          </div>
+          <div class="register-col">
+            <label for="myAccountCity" data-i18n="register_city">City</label>
+            <input type="text" id="myAccountCity" placeholder="City" data-i18n-placeholder="register_city_placeholder">
+          </div>
+          <div class="register-col">
+            <label for="myAccountCountry" data-i18n="register_country">Country</label>
+            <input type="text" id="myAccountCountry" placeholder="Country" data-i18n-placeholder="register_country_placeholder">
+          </div>
+        </div>
+        <button type="submit" class="record-add" data-i18n="my_account_save">Save</button>
+        <div id="myAccountError"></div>
+      </form>
+    </div>
+  </div>
+  <!-- Cart Modal -->
+  <div class="login-modal" id="cartModal">
+    <div class="login-modal-content cart-modal-content">
+      <button class="login-modal-close" id="closeCartBtn">&times;</button>
+      <h2 data-i18n="cart_title">Shopping Cart</h2>
+      <div id="cartItems" class="cart-items-list"></div>
+      <div class="cart-total">
+        <div class="cart-total-row">
+          <span data-i18n="cart_total">Total:</span>
+          <span id="cartTotalPrice">€0.00</span>
+        </div>
+      </div>
+      <div class="cart-actions">
+        <button class="record-add" id="checkoutBtn" data-i18n="checkout">Checkout</button>
+        <button class="admin-cancel-btn" id="clearCartBtn" data-i18n="cart_clear">Clear Cart</button>
+      </div>
+      <div id="cartError" class="cart-error"></div>
+    </div>
+  </div>
+  <!-- Login Modal -->
+  <div class="login-modal" id="loginModal">
+    <div class="login-modal-content">
+      <button class="login-modal-close" id="closeLoginBtn">&times;</button>
+      <h2 data-i18n="login_title"></h2>
+      <form id="loginForm" autocomplete="off">
+        <label for="loginUser" data-i18n="login_username">Email</label>
+        <input type="email" id="loginUser" required placeholder="Email">
+        <label for="loginPass" data-i18n="login_password">Password</label>
+        <input type="password" id="loginPass" required placeholder="Password">
+        <button type="submit" class="record-add" data-i18n="login_btn">Login</button>
+        <div id="loginError"></div>
+      </form>
+      <button class="record-add" id="registerBtn" data-i18n="register_link">No account? Register</button>
+    </div>
+  </div>
+  <!-- Register Modal -->
+  <div class="login-modal" id="registerModal">
+    <div class="login-modal-content">
+      <button class="login-modal-close" id="closeRegisterBtn">&times;</button>
+      <h2 data-i18n="register_title"></h2>
+      <form id="registerForm" autocomplete="off">
+        <label for="registerUser" data-i18n="register_username">Email</label>
+        <input type="email" id="registerUser" required placeholder="Email" data-i18n-placeholder="register_username_placeholder">
+        <label for="registerPass" data-i18n="register_password">Password</label>
+        <input type="password" id="registerPass" required placeholder="Password" data-i18n-placeholder="register_password_placeholder">
+        <label for="registerPassConfirm" data-i18n="register_password_confirm">Confirm Password</label>
+        <input type="password" id="registerPassConfirm" required placeholder="Confirm Password" data-i18n-placeholder="register_password_confirm_placeholder">
+        <label for="registerLastName" data-i18n="register_lastname">Last Name</label>
+        <input type="text" id="registerLastName" placeholder="Last Name" data-i18n-placeholder="register_lastname_placeholder">
+        <label for="registerFirstName" data-i18n="register_firstname">First Name</label>
+        <input type="text" id="registerFirstName" placeholder="First Name" data-i18n-placeholder="register_firstname_placeholder">
+        <div class="register-row">
+          <div class="register-col">
+            <label for="registerStreet" data-i18n="register_street">Street</label>
+            <input type="text" id="registerStreet" placeholder="Street" data-i18n-placeholder="register_street_placeholder">
+          </div>
+          <div class="register-col">
+            <label for="registerNumber" data-i18n="register_number">Number</label>
+            <input type="text" id="registerNumber" placeholder="Number" data-i18n-placeholder="register_number_placeholder">
+          </div>
+          <div class="register-col">
+            <label for="registerApp" data-i18n="register_app">App.</label>
+            <input type="text" id="registerApp" placeholder="App." data-i18n-placeholder="register_app_placeholder">
+          </div>
+        </div>
+        <div class="register-row">
+          <div class="register-col">
+            <label for="registerPostal" data-i18n="register_postal">Postal Code</label>
+            <input type="text" id="registerPostal" placeholder="e.g. 1000" data-i18n-placeholder="register_postal_placeholder">
+          </div>
+          <div class="register-col">
+            <label for="registerCity" data-i18n="register_city">City</label>
+            <input type="text" id="registerCity" placeholder="City" data-i18n-placeholder="register_city_placeholder">
+          </div>
+          <div class="register-col">
+            <label for="registerCountry" data-i18n="register_country">Country</label>
+            <input type="text" id="registerCountry" placeholder="Country" data-i18n-placeholder="register_country_placeholder">
+          </div>
+        </div>
+        <button type="submit" class="record-add" data-i18n="register_btn">Register</button>
+        <div id="registerError"></div>
+      </form>
+    </div>
+  </div>
+  <!-- Address Modal (when checking out if no address is known) -->
+  <div class="login-modal" id="addressModal">
+    <div class="login-modal-content">
+      <button class="login-modal-close" id="closeAddressBtn">&times;</button>
+      <h2 data-i18n="address_title"></h2>
+      <form id="addressForm" autocomplete="off">
+        <label for="addressInput" data-i18n="address_label">Address</label>
+        <input type="text" id="addressInput" required placeholder="Address">
+        <button type="submit" class="record-add" data-i18n="address_save">Save</button>
+        <div id="addressError"></div>
+      </form>
+    </div>
+  </div>
+  <script src="app.js"></script>
+  <script src="models.js"></script>
+</body>
+</html>

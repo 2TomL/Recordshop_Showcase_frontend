@@ -1,0 +1,1 @@
+<div><label>Sale Price (€)<br><input type="number" id="adminSalePrice" min="0" step="0.01" placeholder="Sale Price"></label></div> kan je deze de gewone prijs laten overrulen zodat het pragramma luistert naar deze prijs ,

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin User Management | Accounts</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <section class="section admin-panel" id="adminUserPanel">
+    <h1>Accountbeheer</h1>
+    <h2>Nieuwe account aanmaken</h2>
+    <form id="adminUserForm" class="admin-record-form">
+      <input type="hidden" id="adminUserEditIndex">
+      <div><label>Email<br><input type="email" id="adminUserName" required placeholder="Email"></label></div>
+      <div><label>Wachtwoord<br><input type="password" id="adminUserPass" required placeholder="Wachtwoord"></label></div>
+      <div><label>Naam<br><input type="text" id="adminUserLastName" placeholder="Naam"></label></div>
+      <div><label>Voornaam<br><input type="text" id="adminUserFirstName" placeholder="Voornaam"></label></div>
+      <div class="register-row">
+        <div class="register-col">
+          <label>Straat<br><input type="text" id="adminUserStreet" placeholder="Straat"></label>
+        </div>
+        <div class="register-col">
+          <label>Nr<br><input type="text" id="adminUserNumber" placeholder="Nr"></label>
+        </div>
+        <div class="register-col">
+          <label>App.<br><input type="text" id="adminUserApp" placeholder="App."></label>
+        </div>
+      </div>
+      <div class="register-row">
+        <div class="register-col">
+          <label>Postcode<br><input type="text" id="adminUserPostal" placeholder="vb: 1000"></label>
+        </div>
+        <div class="register-col">
+          <label>Stad<br><input type="text" id="adminUserCity" placeholder="Brussel"></label>
+        </div>
+        <div class="register-col">
+          <label>Land<br><input type="text" id="adminUserCountry" placeholder="Land"></label>
+        </div>
+      </div>
+      <div><label>Rol<br>
+        <select id="adminUserRole">
+          <option value="user">User</option>
+          <option value="admin">Admin</option>
+        </select>
+      </label></div>
+      <button type="submit" id="adminUserSaveBtn">Account toevoegen</button>
+      <button type="button" id="adminUserCancelBtn" class="admin-cancel-btn">Annuleren</button>
+    </form>
+    <hr class="admin-divider" style="margin:2.5rem 0;">
+    <h2>Bestaande accounts</h2>
+    <div class="admin-search-box">
+      <input type="text" id="adminUserSearch" placeholder="Zoek accounts...">
+    </div>
+    <div id="adminUsersList"></div>
+    <button id="backToAdminBtn" class="record-add" style="margin-top:2rem;">Terug naar Admin Panel</button>
+  </section>
+  <script src="app.js"></script>
+  <script src="models.js"></script>
+  <script>
+    // Handle back to admin panel button
+    document.getElementById('backToAdminBtn').addEventListener('click', function() {
+      window.location.href = 'admin.html';
+    });
+  </script>
+</body>
+</html>

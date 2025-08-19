@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Admin Panel - Doctor Vinyl Records</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <nav class="navbar">
+    <a href="index.html"><img src="assets/Logo-DV1.png" alt="Doctor Vinyl Logo" class="navbar-logo"></a>
+    <div class="navbar-links">
+      <a href="index.html#home" data-i18n="nav_home">Home</a>
+      <a href="index.html#records" data-i18n="nav_records">Records</a>
+      <a href="index.html#specials" data-i18n="nav_specials">Specials</a>
+      <a href="index.html#about" data-i18n="nav_about">About</a>
+      <a href="index.html#contact" data-i18n="nav_contact">Contact/Location</a>
+    </div>
+  </nav>
+  <main>
+    <section class="section admin-panel" id="adminPanel">
+      <div class="admin-back-site" style="display:flex;justify-content:center;margin:2rem 0;">
+        <a href="index.html" class="admin-btn" id="backToSiteBtn">← Terug naar Site / Uitloggen</a>
+      </div>
+      <h2>Admin: Manage Records</h2>
+      <form id="adminRecordForm" class="admin-record-form">
+        <input type="hidden" id="adminEditIndex">
+        <div><label>Artist<br><input type="text" id="adminArtist" required placeholder="Artist"></label></div>
+        <div><label>Photo<br><input type="file" id="adminPhoto" accept="image/*"></label></div>
+        <div><label>Title<br><input type="text" id="adminTitle" required placeholder="Title"></label></div>
+        <div><label>Catalog Nr<br><input type="text" id="adminCatalogNr" required placeholder="Catalog Nr"></label></div>
+        <div><label>Label<br><input type="text" id="adminLabel" placeholder="Label"></label></div>
+        <div><label>Country<br><input type="text" id="adminCountry" placeholder="Country"></label></div>
+        <div><label>Category<br>
+          <select id="adminCategory">
+            <option value="">Select category</option>
+            <option>Deep House</option>
+            <option>Tech House</option>
+            <option>Progressive House</option>
+            <option>Electro House</option>
+            <option>Detroit Techno</option>
+            <option>Minimal Techno</option>
+            <option>Acid Techno</option>
+            <option>Trance</option>
+            <option>Progressive Trance</option>
+            <option>Drum and Bass</option>
+            <option>Jungle</option>
+            <option>Nu Skool Breaks</option>
+            <option>Big Beat</option>
+            <option>Dubstep</option>
+            <option>Hardcore</option>
+            <option>Ambient</option>
+            <option>Experimental</option>
+          </select>
+        </label></div>
+        <div><label>Released<br><input type="text" id="adminReleased" placeholder="Released"></label></div>
+        <div><label>Format<br>
+          <select id="adminFormat">
+            <option value="">Select format</option>
+            <option value="LP">LP</option>
+            <option value="MAXI">MAXI</option>
+            <option value="SEVEN_INCH">SEVEN_INCH</option>
+            <option value="TEN_INCH">TEN_INCH</option>
+            <option value="TWELVE_INCH">TWELVE_INCH</option>
+            <option value="FLEXI_DISK">FLEXI_DISK</option>
+            <option value="OTHER">OTHER</option>
+          </select>
+        </label></div>
+        <div><label>Tracklist<br><input type="text" id="adminTrackList" placeholder="Tracklist"></label></div>
+        <div><label>Price (€)<br><input type="number" id="adminPrice" min="0" step="0.01" required placeholder="Price"></label></div>
+        <div><label>Stock (Qty)<br><input type="number" id="adminQt" min="0" placeholder="Stock"></label></div>
+        <div><label>YouTube Link<br><input type="text" id="adminYtLink" placeholder="YouTube Link"></label></div>
+        <button type="submit" id="adminSaveBtn">Add Record</button>
+        <button type="button" id="adminCancelBtn" class="admin-cancel-btn">Cancel</button>
+      </form>
+      <div class="admin-search-box">
+        <input type="text" id="adminSearch" placeholder="Search records...">
+      </div>
+      <div id="adminRecordsList"></div>
+      <hr class="admin-divider">
+      <h2>Admin: Manage Specials</h2>
+      <form id="adminSpecialForm" class="admin-record-form">
+        <input type="hidden" id="adminSpecialEditIndex">
+        <div><label>Title<br><input type="text" id="adminSpecialTitle" required placeholder="Title"></label></div>
+        <div><label>Photo<br><input type="file" id="adminSpecialPhoto" accept="image/*"></label></div>
+        <div><label>Description<br><input type="text" id="adminSpecialDesc" placeholder="Description"></label></div>
+        <div><label>Price (€)<br><input type="number" id="adminSpecialPrice" min="0" step="0.01" placeholder="Price"></label></div>
+        <button type="submit" id="adminSpecialSaveBtn">Save Special</button>
+        <button type="button" id="adminSpecialCancelBtn" class="admin-cancel-btn">Cancel</button>
+      </form>
+      <div id="adminSpecialsList"></div>
+      <hr class="admin-divider">
+      <h2>Admin: Orders & Shipping</h2>
+      <div class="admin-orders-actions">
+        <a href="orders.html" class="admin-btn">📋 Order Management</a>
+        <p>Manage all orders, track shipments, and handle customer requests</p>
+      </div>
+      <hr class="admin-divider">
+      <button id="openUserManagementBtn" class="admin-btn" data-i18n="manage_users_btn">Gebruikers beheren</button>
+      <button id="openClearStorageBtn" class="admin-cancel-btn">🗑️ Clear Storage Tools</button>
+    </section>
+  </main>
+  <script src="app.js"></script>
+  <script src="models.js"></script>
+  <script>
+document.addEventListener('DOMContentLoaded', function() {
+  // Admin button is nu altijd zichtbaar, geen account-check meer
+});
+</script>
+</body>
+</html>

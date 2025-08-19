@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1.0">
+  <title>Order Management - Doctor Vinyl Records</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="orders-page-body">
+  <div class="orders-container">
+    <a href="admin.html" class="back-button">← Terug naar Admin Records</a>
+    
+    <div class="orders-header">
+      <h1>📦 Order Management</h1>
+      <p>Beheer alle bestellingen en verzendingen</p>
+    </div>
+    
+    <div class="orders-content">
+      <!-- Statistics Cards -->
+      <div class="orders-stats">
+        <div class="stat-card">
+          <h3>📋 Totaal Orders</h3>
+          <div class="stat-number" id="totalOrdersCount">0</div>
+          <div class="stat-label">Alle bestellingen</div>
+        </div>
+        <div class="stat-card">
+          <h3>⏳ Te Verwerken</h3>
+          <div class="stat-number" id="pendingOrdersCount">0</div>
+          <div class="stat-label">Wachten op verwerking</div>
+        </div>
+        <div class="stat-card">
+          <h3>🚚 Verzonden</h3>
+          <div class="stat-number" id="shippedOrdersCount">0</div>
+          <div class="stat-label">Onderweg naar klant</div>
+        </div>
+        <div class="stat-card">
+          <h3>💰 Totale Omzet</h3>
+          <div class="stat-number" id="totalRevenueAmount">€0</div>
+          <div class="stat-label">Bruto verkopen</div>
+        </div>
+      </div>
+      
+      <!-- Action Buttons -->
+      <div class="orders-actions">
+        <button class="btn btn-primary" onclick="refreshOrders()">🔄 Vernieuwen</button>
+        <button class="btn btn-success" onclick="exportOrdersToCSV()">📊 Exporteer CSV</button>
+        <button class="btn btn-warning" onclick="printAllLabels()">🏷️ Print Alle Labels</button>
+        <button class="btn btn-secondary" id="viewToggleBtn" onclick="toggleView()">📋 Lijstweergave</button>
+      </div>
+      
+      <!-- Filters -->
+      <div class="orders-filters">
+        <div class="filter-group">
+          <input type="text" id="orderSearch" placeholder="Zoek op ID, email, naam..." class="orders-search-input">
+          <label for="statusFilter" class="visually-hidden">Orderstatus filter</label>
+          <select id="statusFilter" class="orders-filter-select">
+            <option value="all">Alle Statussen</option>
+            <option value="pending">Te Verwerken</option>
+            <option value="confirmed">Bevestigd</option>
+            <option value="shipped">Verzonden</option>
+            <option value="delivered">Geleverd</option>
+            <option value="cancelled">Geannuleerd</option>
+          </select>
+        </div>
+        <div>
+          <span id="orderCount" class="orders-count-text">0 bestellingen</span>
+        </div>
+      </div>
+      
+      <!-- Orders List -->
+      <div class="orders-list" id="ordersList">
+        <!-- Orders will be populated here -->
+      </div>
+      
+      <!-- Orders Table (List View) -->
+      <div class="orders-table-container view-hidden" id="ordersTable">
+        <table class="orders-table">
+          <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Klant</th>
+              <th>Items</th>
+              <th>Status</th>
+              <th>Totaal</th>
+              <th>Datum</th>
+              <th>Acties</th>
+            </tr>
+          </thead>
+          <tbody id="ordersTableBody">
+            <!-- Table rows will be populated here -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+  
+  <script src="app.js"></script>
+  <script src="orders.js"></script>
+</body>
+</html>

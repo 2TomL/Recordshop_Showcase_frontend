@@ -1,0 +1,113 @@
+{
+    "name": "Doctor Vinyl Records",
+    "short_name": "DoctorVinyl",
+    "description": "Jouw specialist in vinyl platen - ontdek de grootste collectie vinyl records",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#2c3e50",
+    "theme_color": "#2c3e50",
+    "orientation": "portrait-primary",
+    "scope": "/",
+    "lang": "nl",
+    "categories": ["music", "shopping", "entertainment"],
+    "icons": [
+        {
+            "src": "/assets/icon-72x72.png",
+            "sizes": "72x72",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/icon-96x96.png",
+            "sizes": "96x96",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/icon-128x128.png",
+            "sizes": "128x128",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/icon-144x144.png",
+            "sizes": "144x144",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/icon-152x152.png",
+            "sizes": "152x152",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/icon-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/icon-384x384.png",
+            "sizes": "384x384",
+            "type": "image/png",
+            "purpose": "maskable any"
+        },
+        {
+            "src": "/assets/icon-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable any"
+        }
+    ],
+    "screenshots": [
+        {
+            "src": "/assets/screenshot-desktop.png",
+            "sizes": "1280x720",
+            "type": "image/png",
+            "form_factor": "wide",
+            "label": "Doctor Vinyl Records - Desktop weergave"
+        },
+        {
+            "src": "/assets/screenshot-mobile.png",
+            "sizes": "360x640",
+            "type": "image/png",
+            "form_factor": "narrow",
+            "label": "Doctor Vinyl Records - Mobiele weergave"
+        }
+    ],
+    "shortcuts": [
+        {
+            "name": "Catalogus",
+            "short_name": "Catalogus",
+            "description": "Bekijk alle vinyl platen",
+            "url": "/#catalog",
+            "icons": [
+                {
+                    "src": "/assets/shortcut-catalog.png",
+                    "sizes": "96x96"
+                }
+            ]
+        },
+        {
+            "name": "Winkelwagen",
+            "short_name": "Cart",
+            "description": "Bekijk je winkelwagen",
+            "url": "/#cart",
+            "icons": [
+                {
+                    "src": "/assets/shortcut-cart.png",
+                    "sizes": "96x96"
+                }
+            ]
+        }
+    ],
+    "related_applications": [
+        {
+            "platform": "play",
+            "url": "https://play.google.com/store/apps/details?id=com.doctorvinyl.app",
+            "id": "com.doctorvinyl.app"
+        }
+    ],
+    "prefer_related_applications": false
+}
