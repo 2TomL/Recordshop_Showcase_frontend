@@ -62,48 +62,13 @@ const OrderStatus = {
 };
 
 function createOrder(cartItems, customerInfo, shippingData) {
-  const subtotal = cartItems.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-  const total = subtotal + shippingData.cost;
-  
-  const order = {
-    id: 'DV' + Date.now(),
-    items: cartItems.map(item => ({...item})), // Deep copy
-    customer: {
-      email: customerInfo.email || customerInfo.username,
-      firstName: customerInfo.firstName || '',
-      lastName: customerInfo.lastName || '',
-      address: customerInfo.address || ''
-    },
-    shipping: {
-      cost: shippingData.cost,
-      isFree: shippingData.isFree,
-      destination: shippingData.rate.name,
-      weight: cartItems.reduce((w, item) => {
-        const formatWeights = { 'LP': 0.18, 'MAXI': 0.15, 'TWELVE_INCH': 0.15, 'TEN_INCH': 0.12, 'SEVEN_INCH': 0.05, 'FLEXI_DISK': 0.03, 'OTHER': 0.15 };
-        return w + ((formatWeights[item.format] || 0.15) * item.quantity);
-      }, 0)
-    },
-    totals: {
-      subtotal: subtotal,
-      shipping: shippingData.cost,
-      total: total
-    },
-    status: OrderStatus.PENDING,
-    createdAt: new Date().toISOString(),
-    trackingNumber: null
-  };
-  
-  // Save order
-  const orders = JSON.parse(localStorage.getItem('orders')) || [];
-  orders.push(order);
-  localStorage.setItem('orders', JSON.stringify(orders));
-  
-  return order;
+  // Orders are not saved in portfolio mode
+  return null;
 }
 
 function getUserOrders(userEmail) {
-  const orders = JSON.parse(localStorage.getItem('orders')) || [];
-  return orders.filter(order => order.customer.email === userEmail);
+  // No orders in portfolio mode
+  return [];
 }
 
 // --- My Account Modal Logic ---
@@ -330,7 +295,7 @@ document.addEventListener('DOMContentLoaded', function() {
       city,
       country
     };
-    localStorage.setItem('users', JSON.stringify(users));
+  // localStorage disabled in portfolio mode
     // Haal de nieuwste user data uit localStorage voor validatie
     const latestUsers = JSON.parse(localStorage.getItem('users') || '{}');
     const latestUser = latestUsers[currentUser] || {};
@@ -447,7 +412,7 @@ if (document.getElementById('adminUserForm')) {
         country,
         role
       };
-      localStorage.setItem('users', JSON.stringify(users));
+  // localStorage disabled in portfolio mode
       form.reset();
       editIndex.value = '';
       document.getElementById('adminUserSaveBtn').textContent = 'Add User';
@@ -546,7 +511,7 @@ function renderAdminUsersList(filter = '') {
       if (confirm('Delete this account?')) {
         let users = JSON.parse(localStorage.getItem('users') || '{}');
         delete users[username];
-        localStorage.setItem('users', JSON.stringify(users));
+  // localStorage disabled in portfolio mode
         renderAdminUsersList(document.getElementById('adminUserSearch')?.value || '');
       }
     });
@@ -649,12 +614,31 @@ function renderSpecialsGrid() {
   });
 }
 // --- Admin: specials beheer ---
-let specials = JSON.parse(localStorage.getItem('specials') || '[]');
+// Dummy specials data (portfolio mode)
+let specials = [
+  {
+    title: 'Limited Edition LP',
+    price: 29.99,
+    desc: 'Special colored vinyl',
+    sale: true,
+    salePrice: 19.99,
+    img: 'assets/Logo-DV1.png'
+  },
+  {
+    title: 'Classic Maxi',
+    price: 14.99,
+    desc: 'Original 80s pressing',
+    sale: false,
+    salePrice: null,
+    img: 'assets/KH-dance4.jpg'
+  }
+];
 const adminSpecialsList = document.getElementById('adminSpecialsList');
 const adminSpecialForm = document.getElementById('adminSpecialForm');
 
 function saveSpecials() {
-  localStorage.setItem('specials', JSON.stringify(specials));
+  // localStorage disabled in portfolio mode
+  // specials are not saved
 }
 
 function renderAdminSpecialsList() {
@@ -811,13 +795,34 @@ document.addEventListener('DOMContentLoaded', function() {
   renderSpecialsGrid();
 });
 // --- Admin: platenbeheer met foto upload ---
-let records = JSON.parse(localStorage.getItem('records') || '[]');
+// Dummy records data (portfolio mode)
+let records = [
+  {
+    artist: 'The Beatles',
+    title: 'Abbey Road',
+    catalogNr: 'PCS 7088',
+    qt: 5,
+    price: 24.99,
+    salePrice: 19.99,
+    img: 'assets/doctorvinyl.jpg'
+  },
+  {
+    artist: 'Daft Punk',
+    title: 'Discovery',
+    catalogNr: '7243 8496062 1',
+    qt: 2,
+    price: 29.99,
+    salePrice: null,
+    img: 'assets/Pop Art Illustrations Collection.png'
+  }
+];
 const adminRecordForm = document.getElementById('adminRecordForm');
 const adminRecordsList = document.getElementById('adminRecordsList');
 const recordsGrid = document.getElementById('recordsGrid');
 
 function saveRecords() {
-  localStorage.setItem('records', JSON.stringify(records));
+  // localStorage disabled in portfolio mode
+  // records are not saved
 }
 
 function renderAdminRecordsList(filter = '') {
@@ -1412,18 +1417,18 @@ if (!users['admin@doctorvinyl.be']) {
   users['admin@doctorvinyl.be'] = { password: '123', role: 'admin', address: '' };
   // Also keep the old admin for backwards compatibility
   users['admin'] = { password: '123', role: 'admin', address: '' };
-  localStorage.setItem('users', JSON.stringify(users));
+  // localStorage disabled in portfolio mode
 }
 let currentUser = null; // {username, address}
 let userCart = [];
 
 function saveUsers() {
-  localStorage.setItem('users', JSON.stringify(users));
+  // localStorage disabled in portfolio mode
 }
 
 function setCurrentUser(username) {
   currentUser = { username, address: users[username].address || '' };
-  localStorage.setItem('currentUser', username);
+  // localStorage disabled in portfolio mode
   
   // Try to load cart from localStorage first, then sessionStorage
   let cartData = localStorage.getItem('cart_' + username);
@@ -1436,7 +1441,7 @@ function setCurrentUser(username) {
 function saveUserCart() {
   if (currentUser) {
     try {
-      localStorage.setItem('cart_' + currentUser.username, JSON.stringify(userCart));
+  // localStorage disabled in portfolio mode
     } catch (e) {
       if (e.name === 'QuotaExceededError') {
         console.error('LocalStorage quota exceeded. Clearing all localStorage...');
@@ -1453,12 +1458,12 @@ function saveUserCart() {
           'admin@doctorvinyl.be': { password: '123', role: 'admin', address: '' },
           'admin': { password: '123', role: 'admin', address: '' }
         };
-        localStorage.setItem('users', JSON.stringify(users));
-        localStorage.setItem('currentUser', currentUser.username);
+  // localStorage disabled in portfolio mode
+  // localStorage disabled in portfolio mode
         
         // Try to save cart again
         try {
-          localStorage.setItem('cart_' + currentUser.username, JSON.stringify(userCart));
+          // localStorage disabled in portfolio mode
         } catch (e2) {
           console.error('Still unable to save cart data, using sessionStorage');
           // Use sessionStorage as fallback
@@ -1471,7 +1476,7 @@ function saveUserCart() {
   } else {
     // Save guest cart
     try {
-      localStorage.setItem('cart_guest', JSON.stringify(userCart));
+  // localStorage disabled in portfolio mode
     } catch (e) {
       console.error('Error saving guest cart:', e);
       sessionStorage.setItem('cart_guest', JSON.stringify(userCart));
@@ -2072,7 +2077,7 @@ window.addEventListener('storage', updateAdminPanelAccess);
 document.addEventListener('DOMContentLoaded', function() {
   // Check if localStorage is available and not full
   try {
-    localStorage.setItem('test', 'test');
+  // localStorage disabled in portfolio mode
     localStorage.removeItem('test');
   } catch (e) {
     console.warn('LocalStorage issue detected, clearing...');
@@ -2082,7 +2087,7 @@ document.addEventListener('DOMContentLoaded', function() {
       'admin@doctorvinyl.be': { password: '123', role: 'admin', address: '' },
       'admin': { password: '123', role: 'admin', address: '' }
     };
-    localStorage.setItem('users', JSON.stringify(users));
+  // localStorage disabled in portfolio mode
   }
 
   // Clear Storage Button (emergency)
@@ -2228,7 +2233,7 @@ function initClearStoragePage() {
   if (backToAdminBtn) {
     backToAdminBtn.addEventListener('click', function() {
       // Store flag that user is returning to admin panel
-      localStorage.setItem('returnToAdmin', 'true');
+  // localStorage disabled in portfolio mode
       window.location.href = 'index.html#adminPanel';
     });
   }
@@ -2429,6 +2434,6 @@ function addTestOrderIfEmpty() {
     };
     
     orders.push(testOrder);
-    localStorage.setItem('orders', JSON.stringify(orders));
+  // localStorage disabled in portfolio mode
   }
 }

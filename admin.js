@@ -26,8 +26,8 @@ if (document.getElementById('adminUserForm')) {
 function renderAdminUsersList(filter = '') {
   const usersList = document.getElementById('adminUsersList');
   if (!usersList) return;
-  let users = JSON.parse(localStorage.getItem('users') || '{}');
-  let userArr = Object.entries(users).map(([username, u]) => ({ username, ...u }));
+  // No users/accounts in portfolio mode
+  let userArr = [];
   if (filter) {
     userArr = userArr.filter(u =>
       u.username.toLowerCase().includes(filter.toLowerCase()) ||
@@ -85,7 +85,7 @@ function renderAdminUsersList(filter = '') {
       if (confirm('Delete this account?')) {
         let users = JSON.parse(localStorage.getItem('users') || '{}');
         delete users[username];
-        localStorage.setItem('users', JSON.stringify(users));
+  // localStorage disabled in portfolio mode
         renderAdminUsersList(document.getElementById('adminUserSearch')?.value || '');
       }
     });
@@ -156,7 +156,7 @@ const adminSpecialsList = document.getElementById('adminSpecialsList');
 const adminSpecialForm = document.getElementById('adminSpecialForm');
 
 function saveSpecials() {
-  localStorage.setItem('specials', JSON.stringify(specials));
+  // localStorage disabled in portfolio mode
 }
 
 function renderAdminSpecialsList() {
@@ -319,7 +319,7 @@ const adminRecordsList = document.getElementById('adminRecordsList');
 const recordsGrid = document.getElementById('recordsGrid');
 
 function saveRecords() {
-  localStorage.setItem('records', JSON.stringify(records));
+  // localStorage disabled in portfolio mode
 }
 
 function renderAdminRecordsList(filter = '') {
@@ -437,7 +437,7 @@ function changeOrderStatus(orderId) {
           order.trackingNumber = tracking.trim();
         }
       }
-      localStorage.setItem('orders', JSON.stringify(orders));
+  // localStorage disabled in portfolio mode
       refreshOrders();
       showNotification(`Status bijgewerkt naar: ${statuses[statusIndex].label}`, 'success');
     }
@@ -451,7 +451,7 @@ function addTrackingNumber(orderId) {
   const newTracking = prompt(`Tracking nummer voor ${orderId}:\n\nHuidig: ${currentTracking || 'Geen tracking'}\n\nVoer nieuw tracking nummer in:`, currentTracking);
   if (newTracking !== null) {
     order.trackingNumber = newTracking.trim() || null;
-    localStorage.setItem('orders', JSON.stringify(orders));
+  // localStorage disabled in portfolio mode
     refreshOrders();
     showNotification('Tracking nummer bijgewerkt!', 'success');
   }
@@ -608,7 +608,7 @@ function deleteOrder(orderId) {
   }
   const orders = JSON.parse(localStorage.getItem('orders')) || [];
   const filteredOrders = orders.filter(order => order.id !== orderId);
-  localStorage.setItem('orders', JSON.stringify(filteredOrders));
+  // localStorage disabled in portfolio mode
   refreshOrders();
   showNotification(`Bestelling ${orderId} is verwijderd.`, 'success');
 }
