@@ -804,7 +804,7 @@ let records = [
     qt: 5,
     price: 24.99,
     salePrice: 19.99,
-    img: 'assets/doctorvinyl.jpg'
+  img: 'assets/KH-dance4.jpg' // image 1 (Abbey Road)
   },
   {
     artist: 'Daft Punk',
@@ -813,7 +813,7 @@ let records = [
     qt: 2,
     price: 29.99,
     salePrice: null,
-    img: 'assets/Pop Art Illustrations Collection.png'
+  img: 'assets/slipmat-1.jpg' // image 2 (Technics slipmat)
   }
 ];
 const adminRecordForm = document.getElementById('adminRecordForm');
