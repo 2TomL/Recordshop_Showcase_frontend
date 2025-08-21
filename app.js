@@ -1,6 +1,3 @@
-// Global variable to track checkout completion mode
-let isCheckoutCompletionMode = false;
-
 // --- Shipping Calculator ---
 function calculateShipping(cartItems, destination = 'BE') {
   const totalWeight = cartItems.reduce((weight, item) => {
@@ -100,7 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
     myAccountPassConfirm.addEventListener('input', validateMyAccountPasswords);
   }
 
-  // Ensure modal is closed on page load
   myAccountModal.classList.remove('open');
 
   // Show button if logged in
@@ -165,7 +161,6 @@ document.addEventListener('DOMContentLoaded', function() {
       return;
     }
     
-    // Reset checkout completion mode for normal My Account usage
     isCheckoutCompletionMode = false;
     
     // Regular user - open My Account modal
@@ -194,7 +189,6 @@ document.addEventListener('DOMContentLoaded', function() {
       const u = users[currentUser];
       if (!u) return;
       
-      // Check if user is admin
       const isAdmin = u.role === 'admin';
       
       if (isAdmin) {
@@ -925,16 +919,20 @@ function renderRecordsGrid() {
         </div>
       `;
       
+      // Info popup on click
+      div.onclick = function() {
+        showItemInfoPopup(rec);
+      };
       // Add button separately to avoid quote issues
       const addButton = document.createElement('button');
       addButton.className = 'record-add';
       addButton.textContent = 'Add to cart';
       addButton.setAttribute('data-i18n', 'add_to_cart');
-      addButton.onclick = function() {
+      addButton.onclick = function(e) {
+        e.stopPropagation();
         addToCart(`${rec.artist} - ${rec.title}`, rec.salePrice ? rec.salePrice : rec.price, rec.img || '', 'record');
       };
       div.querySelector('.record-card-info').appendChild(addButton);
-      
       recordsGrid.appendChild(div);
     });
   }
@@ -1320,56 +1318,70 @@ function renderSalesRecords() {
     salesList.innerHTML = '<div class="empty-sales-message">No sales records</div>';
     return;
   }
-  // Eerst records met salePrice
-  sales.forEach(rec => {
+  // Records met salePrice
+  sales.forEach(r => {
     const div = document.createElement('div');
     div.className = 'record-card';
     div.innerHTML = `
-      <img src="${rec.img || 'assets/Logo-DV1.png'}" alt="${rec.artist} - ${rec.title}">
+      <img src="${r.img || 'assets/Logo-DV1.png'}" alt="${r.artist} - ${r.title}">
       <div class="record-card-info">
-        <div class="record-title">${rec.title}</div>
-        <div class="record-artist">${rec.artist}</div>
-        <div class="record-price">€${rec.salePrice.toFixed(2)} <span class='sale-old-price'>€${rec.price.toFixed(2)}</span></div>
-        ${rec.ytLink ? `<a href="${rec.ytLink}" target="_blank" class="yt-link"><img src="assets/youtube.png" alt="YouTube"></a>` : ''}
+        <div class="record-title">${r.title}</div>
+        <div class="record-artist">${r.artist}</div>
+        <div class="record-price">
+          <img src='assets/iconssales.png' alt='Sale' class='card-sale-icon ani ani6'> €${r.salePrice.toFixed(2)} <span class='sale-old-price'>€${r.price.toFixed(2)}</span>
+        </div>
       </div>
     `;
-    
-    // Add button separately to avoid quote issues
+    div.onclick = function() {
+      showItemInfoPopup(r);
+    };
     const addButton = document.createElement('button');
     addButton.className = 'record-add';
     addButton.textContent = 'Add to cart';
     addButton.setAttribute('data-i18n', 'add_to_cart');
-    addButton.onclick = function() {
-      addToCart(`${rec.artist} - ${rec.title}`, rec.salePrice, rec.img || '', 'record');
+    addButton.onclick = function(e) {
+      e.stopPropagation();
+      addToCart(`${r.artist} - ${r.title}`, r.salePrice, r.img || '', 'record');
     };
     div.querySelector('.record-card-info').appendChild(addButton);
-    
     salesList.appendChild(div);
   });
-  // Daarna specials met sale=true
+  // Specials met sale=true
   specialsSales.forEach(sp => {
     const div = document.createElement('div');
     div.className = 'record-card';
     div.innerHTML = `
       <img src="${sp.img || 'assets/Logo-DV1.png'}" alt="${sp.title}">
-      <div class="record-title">${sp.title}</div>
-      <div class="record-artist">${sp.desc || ''}</div>
-      <div class="record-price">
-        ${sp.sale ? `<img src='assets/iconssales.png' alt='Sale' class='card-sale-icon ani ani6'> ` : ''}
-        €${sp.salePrice ? parseFloat(sp.salePrice).toFixed(2) : parseFloat(sp.price).toFixed(2)}
-        ${sp.salePrice ? `<span class='sale-old-price'>€${parseFloat(sp.price).toFixed(2)}</span>` : ''}
+      <div class="record-card-info">
+        <div class="record-title">${sp.title}</div>
+        <div class="record-artist">${sp.desc || ''}</div>
+        <div class="record-price">
+          <img src='assets/iconssales.png' alt='Sale' class='card-sale-icon ani ani6'> €${parseFloat(sp.salePrice).toFixed(2)} <span class='sale-old-price'>€${parseFloat(sp.price).toFixed(2)}</span>
+        </div>
       </div>
-      ${sp.ytLink ? `<div class='yt-link-row'><a href="${sp.ytLink}" target="_blank" class="yt-link"><img src="assets/youtube.png" alt="YouTube"></a></div>` : ''}
     `;
-    // Add button separately to avoid quote issues
+    // Info popup on click for specials
+    div.onclick = function(e) {
+      // Prevent opening when clicking the add-to-cart button
+      if (e.target.classList.contains('record-add')) return;
+      showItemInfoPopup({
+        img: sp.img,
+        title: sp.title,
+        artist: sp.desc || '',
+        price: sp.price,
+        salePrice: sp.salePrice,
+        desc: sp.desc
+      });
+    };
     const addButton = document.createElement('button');
     addButton.className = 'record-add';
     addButton.textContent = 'Add to cart';
     addButton.setAttribute('data-i18n', 'add_to_cart');
-    addButton.onclick = function() {
-      addToCart(sp.title, sp.salePrice ? parseFloat(sp.salePrice) : parseFloat(sp.price), sp.img || '', 'special');
+    addButton.onclick = function(e) {
+      e.stopPropagation();
+      addToCart(sp.title, parseFloat(sp.salePrice), sp.img || '', 'special');
     };
-    div.appendChild(addButton);
+    div.querySelector('.record-card-info').appendChild(addButton);
     salesList.appendChild(div);
   });
 }
@@ -1716,7 +1728,7 @@ const registerPass = document.getElementById('registerPass');
 const registerPassConfirm = document.getElementById('registerPassConfirm');
 
 function validateRegisterPasswords() {
-  if (registerPass && registerPassConfirm && registerError) {
+   if (registerPass && registerPassConfirm && registerError) {
     if (registerPassConfirm.value && registerPass.value !== registerPassConfirm.value) {
       registerError.textContent = 'Wachtwoorden komen niet overeen.';
       registerError.style.display = 'block';
@@ -2420,6 +2432,7 @@ function addTestOrderIfEmpty() {
       shipping: {
         cost: 5.95,
         isFree: false,
+        isFree: false,
         destination: 'België',
         weight: 0.36
       },
@@ -2436,4 +2449,45 @@ function addTestOrderIfEmpty() {
     orders.push(testOrder);
   // localStorage disabled in portfolio mode
   }
+}
+
+// Ensure info popup close button always works
+window.addEventListener('DOMContentLoaded', function() {
+  var closeBtn = document.getElementById('closeItemInfoBtn');
+  if (closeBtn) {
+    closeBtn.onclick = function(e) {
+      e.preventDefault();
+      document.getElementById('itemInfoModal').classList.remove('open');
+    };
+  }
+  var modal = document.getElementById('itemInfoModal');
+  if (modal) {
+    modal.addEventListener('mousedown', function(e) {
+      if (e.target === modal) modal.classList.remove('open');
+    });
+  }
+});
+
+// Info popup logic
+function showItemInfoPopup(item) {
+  const modal = document.getElementById('itemInfoModal');
+  if (!modal) return;
+  document.getElementById('itemInfoImg').src = item.img || 'assets/Logo-DV1.png';
+  document.getElementById('itemInfoTitle').textContent = item.title || '';
+  document.getElementById('itemInfoArtist').textContent = item.artist || '';
+  document.getElementById('itemInfoPrice').textContent = item.salePrice ? `€${item.salePrice.toFixed(2)} (Sale)` : `€${item.price.toFixed(2)}`;
+  document.getElementById('itemInfoDesc').textContent = item.desc || '';
+  modal.classList.add('open');
+  // Attach close event every time popup opens to ensure it works
+  const closeBtn = document.getElementById('closeItemInfoBtn');
+  if (closeBtn) {
+    closeBtn.onclick = function(e) {
+      e.preventDefault();
+      modal.classList.remove('open');
+    };
+  }
+  // Hide modal on outside click
+  modal.addEventListener('mousedown', function(e) {
+    if (e.target === modal) modal.classList.remove('open');
+  }, { once: true });
 }

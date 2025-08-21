@@ -7,7 +7,17 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Animated Sidebars (desktop only) -->
+  <!-- Info Popup Modal -->
+  <div id="itemInfoModal" class="info-modal">
+    <div class="info-modal-content">
+      <button id="closeItemInfoBtn" class="info-modal-close">&times;</button>
+      <img id="itemInfoImg" src="" alt="Item image" class="info-modal-img">
+      <h2 id="itemInfoTitle"></h2>
+      <h3 id="itemInfoArtist"></h3>
+      <div id="itemInfoPrice"></div>
+      <div id="itemInfoDesc"></div>
+    </div>
+  </div>
   <div class="animated-sidebar animated-sidebar-left">
     <div class="ani-imgs">
       <br>
@@ -45,7 +55,7 @@
   </div>
       <!-- Navbar -->
       <nav class="navbar">
-        <a href="#home"><img src="assets/Logo-DV1.png" alt="Doctor Vinyl Logo" class="navbar-logo"></a>
+        <a href="#home"><img src="assets/hero-logo.png" alt="Doctor Vinyl Logo" class="navbar-logo"></a>
         <div class="navbar-links">
           <a href="#home" data-i18n="nav_home">Home</a>
           <a href="#records" data-i18n="nav_records">Records</a>
