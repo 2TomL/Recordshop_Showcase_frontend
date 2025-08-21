@@ -1180,7 +1180,7 @@ window.addToCart = function(title, price, img, type) {
   saveUserCart();
   updateCartCount();
   renderCart();
-  openCart();
+  // openCart(); // Cart does not open automatically anymore
 };
 
 window.removeFromCart = function(idx) {
